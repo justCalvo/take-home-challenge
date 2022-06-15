@@ -9,7 +9,7 @@ import CustomTextInput from '../../../components/CustomTextInput';
 import DisplayModal from '../../../components/DisplayModal';
 
 // style
-import { Palette } from '../../../Theme/Palette';
+import { Palette } from '../../../theme/Palette';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const SearchByCoords = ({ data, setData }) => {
