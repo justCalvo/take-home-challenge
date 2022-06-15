@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Alert, ActivityIndicator } from 'react-native';
+import { View, Button, Alert, ActivityIndicator, Platform, StyleSheet } from 'react-native';
 
 // API
 import { GetTimeZoneByCoordinates } from '../../../utils/TimeZoneAPI';
@@ -10,6 +10,7 @@ import DisplayModal from '../../../components/DisplayModal';
 
 // style
 import { Palette } from '../../../Theme/Palette';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const SearchByCoords = ({ data, setData }) => {
   const [latitude, setLatitude] = useState('');
@@ -29,8 +30,19 @@ const SearchByCoords = ({ data, setData }) => {
     setLoading(false);
   }
 
+  const handleIOSNegative = (type, setType) => {
+    if (!type.includes('-')) {
+      setType(`-${type}`)
+    } else {
+      const removeNegative = type.slice(1);
+      setType(removeNegative);
+    }
+  }
+
   return (
     <>
+    <View style={styles.row}>
+      {Platform.OS === 'ios' && <Ionicons name="remove-circle-outline" size={30} color={Palette.primary} onPress={() => handleIOSNegative(latitude, setLatitude)} />}
       <CustomTextInput
         onChange={setLatitude}
         value={latitude}
@@ -38,6 +50,9 @@ const SearchByCoords = ({ data, setData }) => {
         placeholder="Input Latitude"
         returnKeyType="done"
       />
+    </View>
+    <View style={styles.row}>
+      {Platform.OS === 'ios' && <Ionicons name="remove-circle-outline" size={30} color={Palette.primary} onPress={() => handleIOSNegative(longitude, setLongitude)}/>}  
       <CustomTextInput
         onChange={setLongitude}
         value={longitude}
@@ -45,6 +60,7 @@ const SearchByCoords = ({ data, setData }) => {
         placeholder="Input Longitude"
         returnKeyType="done"
       />
+    </View>
       <ActivityIndicator animating={loading} color={Palette.primary} />
       <Button onPress={handlePress} title="Submit" />
       {data && data.status !== "FAILED" && (
@@ -57,5 +73,12 @@ const SearchByCoords = ({ data, setData }) => {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  row: {
+    display: 'flex', 
+    flexDirection: 'row'
+  },
+});
 
 export default SearchByCoords;

@@ -11,8 +11,7 @@ const DisplayModal = ({ modalVisible, setModalVisible, data }) => {
 
   const formatInputTimeZone = useCallback(() => {
     if (data) {
-      const convertUTC = data.timestamp - data.gmtOffset;
-      setLocalCurrentTime(moment.utc(convertUTC).format('H:mm A'))
+      setLocalCurrentTime(moment(data.formatted).format('h:mm A'));
     }
   }, [data]);
 
