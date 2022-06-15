@@ -3,7 +3,7 @@ import { Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import moment from 'moment';
 
 // style
-import { Palette } from "../theme/Palette";
+import { Palette } from "../Theme/Palette";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const DisplayModal = ({ modalVisible, setModalVisible, data }) => {

@@ -1,7 +1,7 @@
 import { TextInput, StyleSheet } from 'react-native';
 
 // style
-import { Palette } from '../theme/Palette';
+import { Palette } from '../Theme/Palette';
 
 const CustomTextInput = ({ value, onChange, keyboardType, placeholder, returnKeyType }) => (
     <TextInput 
